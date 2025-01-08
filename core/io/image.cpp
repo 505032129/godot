@@ -2496,6 +2496,8 @@ Error Image::load(const String &p_path) {
 		WARN_PRINT("Loaded resource as image file, this will not work on export: '" + p_path + "'. Instead, import the image file as an Image resource and load it normally as a resource.");
 	}
 #endif
+
+	print_line("image.cpp load:  " + p_path);
 	return ImageLoader::load_image(p_path, this);
 }
 
@@ -3846,6 +3848,10 @@ Error Image::load_bmp_from_buffer(const Vector<uint8_t> &p_array) {
 }
 
 Error Image::load_svg_from_buffer(const Vector<uint8_t> &p_array, float scale) {
+
+	print_line("load_svg_from_buffer");
+	print_line(p_array);
+
 	ERR_FAIL_NULL_V_MSG(
 			_svg_scalable_mem_loader_func,
 			ERR_UNAVAILABLE,
