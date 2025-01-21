@@ -83,9 +83,6 @@ void ImageFormatLoaderExtension::_bind_methods() {
 Error ImageLoader::load_image(String p_file, Ref<Image> p_image, Ref<FileAccess> p_custom, BitField<ImageFormatLoader::LoaderFlags> p_flags, float p_scale) {
 	ERR_FAIL_COND_V_MSG(p_image.is_null(), ERR_INVALID_PARAMETER, "It's not a reference to a valid Image object.");
 
-
-	print_line("image.loader.cpp load_image:  " + p_file);
-
 	Ref<FileAccess> f = p_custom;
 	if (f.is_null()) {
 		Error err;
@@ -94,8 +91,6 @@ Error ImageLoader::load_image(String p_file, Ref<Image> p_image, Ref<FileAccess>
 	}
 
 	String extension = p_file.get_extension();
-
-	print_line("image.loader.cpp extension:  " + extension);
 
 	for (int i = 0; i < loader.size(); i++) {
 		if (!loader[i]->recognize(extension)) {

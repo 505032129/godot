@@ -84,10 +84,6 @@ Ref<Image> ImageLoaderSVG::load_mem_svg(const uint8_t *p_svg, int p_size, float 
 Error ImageLoaderSVG::create_image_from_utf8_buffer(Ref<Image> p_image, const uint8_t *p_buffer, int p_buffer_size, float p_scale, bool p_upsample) {
 	ERR_FAIL_COND_V_MSG(Math::is_zero_approx(p_scale), ERR_INVALID_PARAMETER, "ImageLoaderSVG: Can't load SVG with a scale of 0.");
 
-	// print_line("create_image_from_utf8_buffer \n");
-	// print_line((const char *)p_buffer);
-
-	// test lunasvg
 	auto document = lunasvg::Document::loadFromData((const char *)p_buffer, p_buffer_size);
 
 	uint32_t width = document->width(), height = document->height();
@@ -99,8 +95,6 @@ Error ImageLoaderSVG::create_image_from_utf8_buffer(Ref<Image> p_image, const ui
 
 	Vector<uint8_t> result;
 	result.resize(width * height * 4);
-
-	// memcpy(result.ptrw(), bitmap.data(), width * height * sizeof(uint32_t));
 
 	uint32_t *buffer = (uint32_t *)bitmap.data();
 
@@ -116,10 +110,6 @@ Error ImageLoaderSVG::create_image_from_utf8_buffer(Ref<Image> p_image, const ui
 	}
 
 	p_image->set_data(width, height, false, Image::FORMAT_RGBA8, result);
-
-	if (width == 150) {
-		bitmap.writeToPng("3.svg.png");
-	}
 
 	return OK;
 }
